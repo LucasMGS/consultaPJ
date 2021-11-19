@@ -1,7 +1,5 @@
-import 'package:consultapj/utils/constants/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-// import 'package:flutter_svg/svg.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -84,11 +82,11 @@ class SignupPage extends StatelessWidget {
                           child: Text(
                             'Cadastrar',
                             style: TextStyle(
-                              color: Colors.black,
-                            ),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
-                            Modular.to.pushNamed(Routes.HOME_PAGE);
+                            Modular.to.pop();
                           },
                         ),
                       ),

@@ -1,9 +1,8 @@
-import 'package:consultapj/utils/services/api.dart';
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatefulWidget {
   final Function(String) getQuery;
-  const SearchBar({Key? key,required this.getQuery}) : super(key: key);
+  const SearchBar({Key? key, required this.getQuery}) : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -51,12 +50,8 @@ class _SearchBarState extends State<SearchBar> {
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(backgroundColor: Colors.orange),
               child: Icon(Icons.search),
-              onPressed: () async {
-                final response = await api
-                    .get('/companies/41954949000108?company_max_age=365');
-                
-                print(response);
-                // print(_queryController.text);
+              onPressed: () {
+                widget.getQuery(_queryController.text);
               },
             ),
           ),

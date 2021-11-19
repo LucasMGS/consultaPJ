@@ -1,7 +1,9 @@
+import 'package:consultapj/models/company_model.dart';
 import 'package:consultapj/modules/Home/Widgets/company_content.dart';
 import 'package:consultapj/modules/Home/Widgets/address_content.dart';
 import 'package:consultapj/modules/Home/Widgets/searchbar_widget.dart';
 import 'package:consultapj/modules/Home/Widgets/title_container.dart';
+import 'package:consultapj/utils/services/api.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,29 +13,36 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+late Company company;
+String? cnpj;
+
 class _HomePageState extends State<HomePage> {
   @override
-  Widget build(BuildContext context) {
-      
-      _getQuery(String query){
+  void initState() {
+    super.initState();
+    company = Company();
+  }
 
-      }
+  @override
+  Widget build(BuildContext context) {
+    _getQuery(String cnpj) async {
+      cnpj = cnpj
+          .replaceAll('.', '')
+          .replaceAll(',', '')
+          .replaceAll('-', '')
+          .replaceAll('/', '');
+      final response = await api.get('/companies/$cnpj?company_max_age=365');
+      print(response);
+      setState(() {
+        company = Company.fromJson(response.data);
+      });
+    }
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text('Home'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_basket_rounded),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -44,21 +53,16 @@ class _HomePageState extends State<HomePage> {
               height: 200,
               width: 200,
             ),
-            SearchBar(),
+            SearchBar(getQuery: _getQuery),
             SizedBox(height: 45),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TitleContainer(text: 'Dados empresa'),
-                  CompanyContent(),
+                  CompanyContent(company: company),
                   TitleContainer(text: 'Endereço'),
-                  AddressContent(),
-                  TitleContainer(text: 'Quadro Societário'),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    child: Text('Nome:'),
-                  ),
+                  AddressContent(company: company),
                 ],
               ),
             ),

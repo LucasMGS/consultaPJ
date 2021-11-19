@@ -1,4 +1,3 @@
-import 'package:consultapj/modules/Login/login_page.dart';
 import 'package:consultapj/utils/constants/routes.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ class AppWidget extends StatelessWidget {
       //   showPerformanceOverlay: true,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
-        buttonColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.LOGIN_PAGE,

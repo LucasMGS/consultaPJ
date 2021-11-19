@@ -1,7 +1,9 @@
+import 'package:consultapj/models/company_model.dart';
 import 'package:flutter/material.dart';
 
 class AddressContent extends StatelessWidget {
-  const AddressContent({Key? key}) : super(key: key);
+  final Company company;
+  const AddressContent({Key? key, required this.company}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,11 @@ class AddressContent extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Text(
-                  'Cidade: ',
+                  'Cidade: ${company.address?.city ?? 'N/D'}',
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text('Estado: '),
+              Text('Estado: ${company.address?.state ?? 'N/D'}'),
             ],
           ),
           SizedBox(height: 10),
@@ -28,15 +30,15 @@ class AddressContent extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Text(
-                  'Telefone: ',
+                  'Telefone: ${company.phone ?? 'N/D'}',
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text('Porte: '),
+              Text('Porte: ${company.size ?? 'N/D'}'),
             ],
           ),
           SizedBox(height: 10),
-          Text('Email: '),
+          Text('Email: ${company.email ?? 'N/D'}'),
         ],
       ),
     );

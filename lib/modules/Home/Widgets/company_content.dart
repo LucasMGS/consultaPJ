@@ -1,7 +1,9 @@
+import 'package:consultapj/models/company_model.dart';
 import 'package:flutter/material.dart';
 
 class CompanyContent extends StatelessWidget {
-  const CompanyContent({Key? key}) : super(key: key);
+  final Company company;
+  const CompanyContent({Key? key, required this.company}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,9 @@ class CompanyContent extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Razão social: '),
+                Text('Razão social: ${company.name ?? ''}'),
                 SizedBox(height: 10),
-                Text('Fantasia: '),
+                Text('Fantasia: ${company.alias ?? ''}'),
               ],
             ),
           ),
